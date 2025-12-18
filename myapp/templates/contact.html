@@ -1,0 +1,150 @@
+{% extends "base.html" %} 
+{% block content %} 
+{% load static %}
+      <!-- bradcam_area  -->
+      <div class="bradcam_area bradcam_bg_3">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                        <h3>Contact us</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ bradcam_area  -->
+  <!-- ================ contact section start ================= -->
+  <section class="contact-section section_padding">
+    <div class="container">
+      <div class="d-none d-sm-block mb-5 pb-4">
+      <!-- Google Map -->
+        <!-- <div class="container my-4"> -->
+            <h4 class="mb-3">Our Location</h4>
+
+            <div style="max-width:100%;height:400px;">
+              <iframe
+                width="100%" height="100%" frameborder="0" style="border:0"
+                src="https://www.google.com/maps?q=G-3%20Empire%20State%20Building%2C%20Ring%20Road%2C%20Udhna%20Darwaja%2C%20Surat&output=embed"
+                allowfullscreen=""
+                loading="lazy">
+              </iframe>
+            </div>
+        <!-- </div> -->
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <h2 class="contact-title">Get in Touch</h2>
+        </div>
+        <div class="col-lg-8">
+          <!-- <form method="post" action="{% url 'contact' %}">
+            {% csrf_token %}
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <textarea class="form-control w-100" name="message" placeholder="Enter Message"></textarea>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <input class="form-control" name="name" type="text" placeholder="Enter your name">
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <input class="form-control" name="email" type="email" placeholder="Enter email address">
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group">
+                    <input class="form-control" name="subject" type="text" placeholder="Enter Subject">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group mt-3">
+                <button type="submit" class="button button-contactForm btn_4 boxed-btn">Send Message</button>
+              </div>
+
+          </form> -->
+          {% if messages %}
+              {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }} mt-2">{{ message }}</div>
+              {% endfor %}
+          {% endif %}
+
+
+          <form method="post" action="{% url 'contact' %}">
+              {% csrf_token %}
+              <div class="row">
+                  <div class="col-12">
+                      <div class="form-group">
+                          <textarea class="form-control w-100" name="message" placeholder="Enter Message"></textarea>
+                      </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                          <input class="form-control" name="name" type="text" placeholder="Enter your name">
+                      </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                          <input class="form-control" name="email" type="email" placeholder="Enter email address">
+                      </div>
+                  </div>
+
+                  <div class="col-12">
+                      <div class="form-group">
+                          <input class="form-control" name="subject" type="text" placeholder="Enter Subject">
+                      </div>
+                  </div>
+              </div>
+
+              <div class="form-group mt-3">
+                  <button type="submit" class="button button-contactForm btn_4 boxed-btn">
+                      Send Message
+                  </button>
+              </div>
+          </form>
+
+        </div>
+        <div class="col-lg-4">
+          <!-- Name & Office -->
+          <div class="media contact-info">
+            <span class="contact-info__icon"><i class="ti-home"></i></span>
+            <div class="media-body">
+              <h3>Full Name: Dnyandip Patil</h3>
+              <p>Mobile: 9727721170<br>Office: 9974781399 / 9227172939</p>
+              <p>Address: G-3, Empire State Building, Ring Road, Udhna Darwaja, Surat</p>
+            </div>
+          </div>
+
+          <!-- Mobile / Timing -->
+          <div class="media contact-info">
+            <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+            <div class="media-body">
+              <h3>+91 972 772 1170</h3>
+              <p>Mon to Fri 9am to 6pm</p>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="media contact-info">
+            <span class="contact-info__icon"><i class="ti-email"></i></span>
+            <div class="media-body">
+              <h3><a href="mailto:vandanamadvisorspvtltd@gmail.com">vandanamadvisorspvtltd@gmail.com</a></h3>
+              <p>Send us your query anytime!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ contact section end ================= -->
+{% endblock %}
