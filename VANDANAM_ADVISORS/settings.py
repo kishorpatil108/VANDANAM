@@ -23,10 +23,17 @@ SECRET_KEY = config(
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    '72.60.205.163',
-    'vandanamadvisor.com',
-    'www.vandanamadvisor.com',
+    "vandanamadvisor.com",
+    "www.vandanamadvisor.com",
+    "72.60.205.163"
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://vandanamadvisor.com",
+    "https://www.vandanamadvisor.com"
+]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # -------------------------------------------------
 # APPLICATIONS
