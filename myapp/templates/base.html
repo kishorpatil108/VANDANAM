@@ -220,12 +220,17 @@
                             <h3 class="footer_title">
                                 Subscribe
                             </h3>
-                            <form method="POST" action="{% url 'index' %}" class="newsletter_form">
+                            <!-- <form method="POST" action="{% url 'index' %}" class="newsletter_form">
                                 {% csrf_token %}
-                                <input type="email" name="email" placeholder="Enter your mail" required>
+                                <input type="email" name="subscribe_email" id="subscribe_email" placeholder="Enter your mail" required>
                                 <button type="submit">Subscribe</button>
-                            </form>
-
+                            </form> -->
+<!-- Newsletter Form -->
+    <form method="POST" action="{% url 'subscribe' %}" class="newsletter_form">
+        {% csrf_token %}
+        <input type="email" name="subscribe_email" id="subscribe_email" placeholder="Enter your email" required>
+        <button type="submit">Subscribe</button>
+    </form>
 
                             <p class="newsletter_text">Esteem spirit temper too say adieus who direct esteem esteems
                                 luckily.</p>

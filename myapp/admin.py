@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import LoanApplication, Subscriber, Contact
+from .models import LoanApplication, Subscriber, Contact, BlogPost
+
+admin.site.site_header = "Vandanam Advisors Administration"
 
 @admin.register(LoanApplication)
 class LoanApplicationAdmin(admin.ModelAdmin):
@@ -19,3 +21,7 @@ class ContactAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email', 'subject')
     list_filter = ('created_at',)
     ordering = ('-created_at',)
+
+@admin.register(BlogPost)
+class BlogPostAdmin(admin.ModelAdmin):
+    list_display = ('title', 'created_at')

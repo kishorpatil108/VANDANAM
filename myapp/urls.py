@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
@@ -11,5 +13,7 @@ urlpatterns = [
     path('single-blog/', views.single_blog, name='single-blog'),
     path('faq/', views.faq, name='FAQ'),
     path('contact/', views.contact, name='contact'),
-    path('subscribe/', views.subscribe, name='subscribe'),
+    path('subscribe/', views.subscriber, name='subscribe'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

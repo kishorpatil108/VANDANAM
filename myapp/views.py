@@ -10,6 +10,8 @@ from .forms import LoanForm
 from .forms import SubscriberForm
 from .models import Subscriber
 from .models import Contact
+from .models import BlogPost
+from django.core.paginator import Paginator
 
 
 
@@ -26,7 +28,13 @@ def elements(request):
     return render(request, 'elements.html')
 
 def blog(request):
-    return render(request, 'blog.html')
+    post_list = BlogPost.objects.order_by('-created_at')
+    paginator = Paginator(post_list, 5)   # ✅ 5 posts per page
+
+    page_number = request.GET.get('page')
+    posts = paginator.get_page(page_number)
+
+    return render(request, 'blog.html', {'posts': posts})
 
 def single_blog(request):
     return render(request, 'single-blog.html')
@@ -104,66 +112,7 @@ def contact(request):
 
     return render(request, "contact.html")
 
-# def apply_loan(request):
-#     if request.method == "POST":
-#         name = request.POST.get("name")
-#         mobile = request.POST.get("mobile")
-#         loan_type = request.POST.get("loan_type")
 
-#         # Validation
-#         if not mobile or len(mobile) != 10 or not mobile.isdigit():
-#             messages.error(request, "Enter a valid 10-digit mobile number.")
-#             return redirect("apply-loan")  # make sure 'apply-loan' exists in urls.py
-
-#         # Duplicate check
-#         if LoanApplication.objects.filter(mobile=mobile).exists():
-#             messages.error(request, "This mobile number is already registered.")
-#             return redirect("apply-loan")
-
-#         # Save data
-#         LoanApplication.objects.create(
-#             name=name,
-#             mobile=mobile,
-#             loan_type=loan_type
-#         )
-
-#         messages.success(request, "Loan application submitted successfully!")
-#         return redirect("apply-loan")
-
-#     return render(request, "apply.html")
-
-
-# def apply_loan(request):
-#     if request.method == "POST":
-#         name = request.POST.get("name")
-#         mobile = request.POST.get("mobile")
-#         loan_type = request.POST.get("loan_type")
-
-#         # Validation
-#         if not mobile or len(mobile) != 10 or not mobile.isdigit():
-#             messages.error(request, "Enter a valid 10-digit mobile number.")
-#             return redirect("apply-loan")
-
-#         # Duplicate check
-#         if LoanApplication.objects.filter(mobile=mobile).exists():
-#             messages.error(request, "This mobile number is already registered.")
-#             return redirect("apply-loan")
-
-#         # Save Data
-#         loan = LoanApplication.objects.create(
-#             name=name,
-#             mobile=mobile,
-#             loan_type=loan_type
-#         )
-
-#         # Send SMS Notification
-#         sms_message = f"Dear {name}, your loan application for {loan_type} is received successfully!"
-#         send_sms(mobile, sms_message)
-
-#         messages.success(request, "Loan application submitted successfully!")
-#         return redirect("apply-loan")
-
-#     return render(request, "apply.html")
 
 
 
@@ -217,28 +166,23 @@ def apply_loan(request):
     return render(request, "apply.html", context)
 
 
-def subscribe(request):
+def subscriber(request):
     if request.method == "POST":
-        email = request.POST.get('email')
+        email = request.POST.get('subscribe_email')
 
         # Check if email already exists
         if Subscriber.objects.filter(email=email).exists():
             messages.error(request, "This email is already subscribed.")
             return redirect('subscribe')
 
+        # Save new subscriber
         form = SubscriberForm(request.POST)
 
+        form = SubscriberForm({'email': email})
         if form.is_valid():
             form.save()
             messages.success(request, "Thank you for subscribing!")
-            return redirect('subscribe')  # correct — redirect to same page
         else:
-            messages.error(request, "Invalid email address.")
-            return redirect('subscribe')
+            messages.error(request, form.errors)  # show what exactly is wrong
 
-    else:
-        form = SubscriberForm()
-
-    return render(request, "base.html", {"form": form})
-
-
+    return render(request, 'index.html')  # your template
