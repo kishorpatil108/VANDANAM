@@ -16,17 +16,17 @@ SECRET_KEY = config(
     default='django-insecure-change-this-immediately'
 )
 
-# DEBUG = True
+DEBUG = True
 
-# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = []
 
-DEBUG = False
+# DEBUG = False
 
-ALLOWED_HOSTS = [
-    'www.vandanamadvisor.com',
-    'vandanamadvisor.com',
-    '72.60.205.163',
-]
+# ALLOWED_HOSTS = [
+#     'www.vandanamadvisor.com',
+#     'vandanamadvisor.com',
+#     '72.60.205.163',
+# ]
 
 # -------------------------------------------------
 # APPLICATIONS
